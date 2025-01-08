@@ -53,6 +53,28 @@ def convert_to_binary(gray_img, threshold=128):
 
   return binary_img
 
+# Function to save image
+def save_image(img, filename):
+    Image.fromarray(img.astype(np.uint8)).save(filename)
+
+# Function that allows the user to download the image
+def create_download_button(binary_img, filename):
+    root = tk.Tk()
+    root.title("Download da Imagem")
+    
+    # Download function
+    def on_download():
+        save_image(binary_img, filename)
+        print(f"Imagem salva como {filename}. Você pode baixá-la agora.")
+        root.quit()  # Close window after download
+    
+    # Create download button
+    download_button = tk.Button(root, text="Salvar Imagem em Preto e Branco", command=on_download)
+    download_button.pack(pady=20)
+    
+    # Starts UI
+    root.mainloop()
+
 # --------------------------- Main ---------------------------
 
 # Upload Image
@@ -63,4 +85,7 @@ gray_img = convert_to_grayscale(img_pth)
 
 # Convert Image to Binary
 binary_img = convert_to_binary(gray_img)
+
+# Download Image
+create_download_button(binary_img, 'binary_image.jpg')
 
