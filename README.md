@@ -1,0 +1,1 @@
+# reduction_of_color_space_dimensionality
