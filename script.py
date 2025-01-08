@@ -41,6 +41,18 @@ def convert_to_grayscale(img_pth):
 
   return gray_img
 
+# Function that reduces the color space dimensionality of an image (grayscale -> binary)
+def convert_to_binary(gray_img, threshold=128):
+  # Convert the grayscale image to binary
+  binary_img = np.where(gray_img > threshold, 255, 0)
+
+  # Display the binary image
+  plt.imshow(binary_img, cmap='gray')
+  plt.axis('off')
+  plt.show()
+
+  return binary_img
+
 # --------------------------- Main ---------------------------
 
 # Upload Image
@@ -48,3 +60,7 @@ img_pth = upload_images()
 
 # Convert Image to Grayscale
 gray_img = convert_to_grayscale(img_pth)
+
+# Convert Image to Binary
+binary_img = convert_to_binary(gray_img)
+
