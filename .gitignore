@@ -1,0 +1,22 @@
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ambiente virtual
+env/
+venv/
+
+# Arquivos de cache do editor
+.vscode/
+.idea/
+
+# Arquivos temporários
+*.log
+*.bak
+*.swp
+
+# Arquivos de configurações do sistema
+.DS_Store
+Thumbs.db
