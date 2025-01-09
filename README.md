@@ -58,7 +58,7 @@ Clique [aqui](https://colab.research.google.com/drive/1cIXxTBc9FmDK1ioxyV4qZSog4
    ![image](https://github.com/user-attachments/assets/2ee4ab49-cdb9-4561-9008-ab6c6bcacf41)
    ![image](https://github.com/user-attachments/assets/3c3f9df8-1d4a-4efa-9a66-62a6e13c1ff3)
 
-3. Por último, você pode realizar salvar as fotos geradas, se quiser. Elas serão salvas na pasta `/images`
+3. Por último, você pode salvar as fotos geradas, se quiser. Elas serão salvas na pasta `/images`
    ![image](https://github.com/user-attachments/assets/b353a71a-e200-4e03-a0f0-54a0d54e324e)
 
 ### Estrutura do Projeto
