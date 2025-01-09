@@ -24,38 +24,46 @@ def upload_images():
 
 # Function that reduces the color space dimensionality of an image (color -> grayscale)
 def convert_to_grayscale(img_pth):
-  img = Image.open(img_pth) # Open Image
-  img_array = np.array(img) # Convert Image to Array
+    img = Image.open(img_pth)
+    img = img.convert("RGB") # Make sure the image is in RGB mode
+    width, height = img.size
 
-  # Checks if the image is colored
-  if len(img_array.shape) == 3:
-    # Convert the image to grayscale
-    gray_img = np.dot(img_array[...,:3], [0.2989, 0.5870, 0.1140])
-  else:
-    gray_img = img_array
-  
-  # Display the grayscale image
-  plt.imshow(gray_img, cmap='gray')
-  plt.axis('off')
-  plt.show()
+    grayscale_img = Image.new("L", (width, height))  # Creates a new image in grayscale mode (still blank, needs to be filled)
 
-  return gray_img
+    # Loop through each pixel in the image
+    for i in range(width):
+        for j in range(height):
+            r, g, b = img.getpixel((i, j))  # Get the RGB values of the pixel
+            gray = int(0.2989 * r + 0.5870 * g + 0.1140 * b)  # Calculate the grayscale value of the pixel
+            grayscale_img.putpixel((i, j), gray)  # Set the pixel in the new image to the grayscale value
+
+    # Display the grayscale image
+    plt.imshow(grayscale_img, cmap='gray')
+    plt.axis('off')
+    plt.show()
+
+    return grayscale_img
 
 # Function that reduces the color space dimensionality of an image (grayscale -> binary)
-def convert_to_binary(gray_img, threshold=128):
-  # Convert the grayscale image to binary
-  binary_img = np.where(gray_img > threshold, 255, 0)
+def convert_to_binary(grayscale_img, threshold=128):
+    width, height = grayscale_img.size
+    binary_img = Image.new("1", (width, height))  # Creates a new image in binary mode ("1" means one bit per pixel)
 
-  # Display the binary image
-  plt.imshow(binary_img, cmap='gray')
-  plt.axis('off')
-  plt.show()
+    for i in range(width):
+        for j in range(height):
+            gray = grayscale_img.getpixel((i, j))  # Get the grayscale value of the pixel
+            binary_img.putpixel((i, j), 255 if gray > threshold else 0)  # Set the pixel in the new image to 255 (white) if the grayscale value is greater than the threshold, otherwise set it to 0 (black)
 
-  return binary_img
+    # Display the binary image
+    plt.imshow(binary_img)
+    plt.axis('off')
+    plt.show()
+
+    return binary_img
 
 # Function to save image
 def save_image(img, filename):
-    Image.fromarray(img.astype(np.uint8)).save(filename)
+    img.save(filename)
 
 # Function to create download buttons
 def create_download_button(gray_img, binary_img):
